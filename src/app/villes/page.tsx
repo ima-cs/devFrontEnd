@@ -34,35 +34,51 @@ const CITIES: CityPoint[] = [
   { name: "Dakhla",     region: "Sahara — Oued Ed-Dahab",         x: 28,  y: 451, labelDx: 14,  anchor: "start" },
 ];
 
-// Contour stylisé du Royaume du Maroc, Sahara occidental inclus.
-// Sens horaire depuis le NW (Cap Spartel près de Tanger).
+// Contour du Royaume du Maroc, Sahara marocain inclus.
+// Lignes droites uniquement, angles francs (style cartographique
+// administratif) :
+//   - Côte méditerranéenne avec un seul pic clair au Cap Trois Fourches
+//   - Bulge marqué de Figuig sur la frontière algérienne
+//   - Cassure nette à la transition Maroc proper / Sahara marocain
+//   - Sahara marocain en parallélogramme aux côtés droits
+//   - Base sud quasi-horizontale et pointe nette de Cap Blanc
+//   - Côte atlantique en diagonale continue sans micro-courbes
+// Sens horaire depuis Cap Spartel.
 const MOROCCO_OUTLINE = `
-M 268 6
-C 290 6, 320 16, 348 24
-C 365 30, 376 40, 380 56
-C 382 90, 381 120, 378 150
-C 374 175, 364 195, 352 215
-C 345 235, 348 258, 350 282
-C 348 305, 332 325, 310 345
-C 280 370, 245 395, 210 422
-C 175 448, 135 468, 95 478
-C 70 484, 45 487, 22 484
-C 12 480, 8 470, 14 460
-C 22 442, 30 425, 32 408
-C 32 388, 38 370, 48 350
-C 60 325, 78 300, 95 275
-C 115 248, 138 220, 158 195
-C 178 172, 195 148, 210 125
-C 222 105, 235 88, 248 70
-C 256 52, 262 32, 266 14
-C 267 9, 268 6, 268 6 Z
+M 278 8
+
+L 282 10 L 290 13 L 298 17 L 308 22 L 320 25
+L 332 27 L 343 22 L 350 18 L 358 22 L 365 28
+L 371 33 L 376 38 L 378 50
+
+L 378 80 L 377 115 L 379 135 L 392 145 L 396 152
+L 392 160 L 388 168 L 384 178 L 380 188 L 378 198
+
+L 374 215 L 364 235 L 348 258 L 327 280 L 300 295
+L 268 308 L 235 315 L 220 320
+
+L 218 345 L 213 375 L 205 405 L 192 435 L 175 462
+L 158 478
+
+L 130 480 L 100 482 L 70 485 L 40 492 L 18 502
+
+L 5 514 L 2 510 L 4 498 L 10 488
+
+L 18 472 L 24 455 L 28 451 L 32 438 L 38 420
+L 45 398 L 53 375 L 62 352 L 72 330 L 82 312
+L 90 295 L 97 278 L 103 263 L 112 250 L 125 240
+L 140 230 L 158 222 L 172 215 L 182 205 L 185 192
+L 182 178 L 180 162 L 184 145 L 192 128 L 200 112
+L 210 100 L 220 93 L 232 89 L 240 84 L 248 76
+L 254 68 L 259 58 L 263 45 L 267 32 L 271 20
+L 275 12 L 278 8 Z
 `.trim();
 
-// Petit indice de relief intérieur (Atlas / Rif)
+// Reliefs intérieurs : Atlas en diagonale NE→SW. Décoratif uniquement.
 const ATLAS_HINT = `
-M 268 50 C 290 60, 320 75, 345 95
-M 240 110 C 245 145, 230 180, 215 210
-M 195 220 C 175 260, 155 295, 125 340
+M 295 50 L 320 75 L 345 95
+M 240 115 L 245 150 L 230 185
+M 215 195 L 180 240 L 130 305
 `.trim();
 
 export default async function VillesPage() {

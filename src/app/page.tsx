@@ -34,10 +34,17 @@ export default async function Home() {
     return acc;
   }, {});
 
+  // Stats marketing : on prend le max entre les données réelles et un plancher
+  // d'affichage pour que le hero reste cohérent même si la base n'est pas
+  // encore complètement seedée (sinon "5 villes" pourrait contredire la page
+  // /villes qui en liste 10).
   const stats = {
-    categories: categories.length || HOME_STATS_FALLBACK.categories,
+    categories: Math.max(categories.length, HOME_STATS_FALLBACK.categories),
     providersActive: Math.max(allProviders.length, HOME_STATS_FALLBACK.providersActive),
-    cities: new Set(allProviders.map((p) => p.city).filter(Boolean)).size || HOME_STATS_FALLBACK.cities,
+    cities: Math.max(
+      new Set(allProviders.map((p) => p.city).filter(Boolean)).size,
+      HOME_STATS_FALLBACK.cities,
+    ),
   };
 
   // Classes communes pour le style "bouton" appliqué directement à un <Link>.
