@@ -4,10 +4,15 @@ import { StarRating } from "@/components/StarRating";
 import { PremiumBadge } from "@/components/PremiumBadge";
 import { ReviewCard } from "@/components/cards/ReviewCard";
 import { Button } from "@/components/ui/Button";
+import { DEMO_PROVIDERS } from "@/lib/demo-data";
 import { getProviderById, getReviewsForProvider } from "@/lib/queries";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  return DEMO_PROVIDERS.map((p) => ({ id: p.id }));
 }
 
 export default async function ProviderDetailPage({ params }: PageProps) {
